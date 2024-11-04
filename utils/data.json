@@ -1,0 +1,116 @@
+{
+  "questions": [
+    {
+      "question": "Which is the most popular Javascript framework?",
+      "options": ["Angular", "React", "Vue", "Svelte"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of React's useState hook?",
+      "options": [
+        "To manage side effects",
+        "To handle API calls",
+        "To manage component state",
+        "To handle DOM updates"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What does the virtual DOM do in React?",
+      "options": [
+        "It creates a copy of the entire webpage",
+        "It directly updates the real DOM",
+        "It is used to render HTML elements",
+        "It efficiently manages DOM changes without directly touching the real DOM"
+      ],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "Which method is used to pass data from a parent component to a child component?",
+      "options": ["state", "setState", "props", "context"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of the useEffect hook?",
+      "options": [
+        "To handle user input",
+        "To manage component styling",
+        "To perform side effects in function components",
+        "To create new components"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which of these is NOT a valid React lifecycle method?",
+      "options": [
+        "componentDidMount",
+        "componentWillUpdate",
+        "componentDidCatch",
+        "componentWillRender"
+      ],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of the React Context API?",
+      "options": [
+        "To manage side effects",
+        "To fetch data from APIs",
+        "To pass data deeply through the component tree without props",
+        "To handle animations"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which hook should you use to manage a form's state in a functional component?",
+      "options": ["useEffect", "useReducer", "useContext", "useRef"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "In React, what is a 'controlled component'?",
+      "options": [
+        "A component that controls its own state",
+        "A component that uses props for rendering",
+        "A component whose state is managed by the DOM",
+        "A component whose form input state is managed by React"
+      ],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "How do you install React in a new project using create-react-app?",
+      "options": [
+        "npm install react",
+        "npx create-react-app my-app",
+        "npm create-react-app my-app",
+        "yarn add react"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is JSX in React?",
+      "options": [
+        "A CSS preprocessor",
+        "A JavaScript library",
+        "A syntax extension allowing HTML-like syntax in JavaScript",
+        "A React API for managing state"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which hook should you use to persist a value that doesn’t trigger a re-render when it changes?",
+      "options": ["useState", "useReducer", "useMemo", "useRef"],
+      "correctOption": 3,
+      "points": 10
+    }
+  ]
+}
