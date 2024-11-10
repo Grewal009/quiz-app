@@ -9,6 +9,7 @@ const initialstate = {
   questions: [],
   status: "loading", // loading, error, ready, active, finished
   index: 0,
+  answer: null,
 };
 
 const reducer = (state, action) => {
@@ -19,6 +20,8 @@ const reducer = (state, action) => {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
+    case "newAnswer":
+      return { ...state, answer: action.payload };
 
     default:
       throw new Error("Action unknown");
@@ -27,7 +30,7 @@ const reducer = (state, action) => {
 const Main = () => {
   const [state, dispatch] = useReducer(reducer, initialstate);
 
-  const { questions, status, index } = state;
+  const { questions, status, index, answer } = state;
 
   const numOfQuestions = questions.length;
 
@@ -58,7 +61,13 @@ const Main = () => {
         {status === "ready" && (
           <StartScreen numOfQuestions={numOfQuestions} dispatch={dispatch} />
         )}
-        {status === "active" && <Question question={questions[index]} />}
+        {status === "active" && (
+          <Question
+            question={questions[index]}
+            answer={answer}
+            dispatch={dispatch}
+          />
+        )}
       </ReactQuiz>
     </div>
   );
