@@ -5,6 +5,7 @@ import Error from "./Error";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
 import NextButton from "./NextButton";
+import Progress from "./Progress";
 
 const initialstate = {
   questions: [],
@@ -49,7 +50,7 @@ const reducer = (state, action) => {
 const Main = () => {
   const [state, dispatch] = useReducer(reducer, initialstate);
 
-  const { questions, status, index, answer } = state;
+  const { questions, status, index, answer, points } = state;
 
   const numOfQuestions = questions.length;
 
@@ -81,11 +82,19 @@ const Main = () => {
           <StartScreen numOfQuestions={numOfQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Question
-            question={questions[index]}
-            answer={answer}
-            dispatch={dispatch}
-          />
+          <>
+            <Progress
+              index={index}
+              numOfQuestions={numOfQuestions}
+              points={points}
+              answer={answer}
+            />
+            <Question
+              question={questions[index]}
+              answer={answer}
+              dispatch={dispatch}
+            />
+          </>
         )}
         {answer && <NextButton dispatch={dispatch} answer={answer} />}
       </ReactQuiz>
