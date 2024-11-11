@@ -6,6 +6,7 @@ import StartScreen from "./StartScreen";
 import Question from "./Question";
 import NextButton from "./NextButton";
 import Progress from "./Progress";
+import FinishedScreen from "./FinishedScreen";
 
 const initialstate = {
   questions: [],
@@ -13,6 +14,7 @@ const initialstate = {
   index: 0,
   answer: null,
   points: 0,
+  highScore: 0,
 };
 
 const reducer = (state, action) => {
@@ -22,7 +24,7 @@ const reducer = (state, action) => {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return { ...state, status: "active", index: 0, answer: null, points: 0 };
     case "newAnswer":
       // eslint-disable-next-line no-case-declarations
       const question = state.questions.at(state.index);
@@ -42,6 +44,14 @@ const reducer = (state, action) => {
         index: state.index + 1,
         answer: null,
       };
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        answer: null,
+        highScore:
+          state.points > state.highScore ? state.points : state.highScore,
+      };
 
     default:
       throw new Error("Action unknown");
@@ -50,7 +60,7 @@ const reducer = (state, action) => {
 const Main = () => {
   const [state, dispatch] = useReducer(reducer, initialstate);
 
-  const { questions, status, index, answer, points } = state;
+  const { questions, status, index, answer, points, highScore } = state;
 
   const numOfQuestions = questions.length;
 
@@ -96,7 +106,22 @@ const Main = () => {
             />
           </>
         )}
-        {answer && <NextButton dispatch={dispatch} answer={answer} />}
+        {(answer == 0 || answer) && (
+          <NextButton
+            dispatch={dispatch}
+            answer={answer}
+            numOfQuestions={numOfQuestions}
+            index={index}
+          />
+        )}
+        {status === "finished" && (
+          <FinishedScreen
+            points={points}
+            numOfQuestions={numOfQuestions}
+            highScore={highScore}
+            dispatch={dispatch}
+          />
+        )}
       </ReactQuiz>
     </div>
   );
