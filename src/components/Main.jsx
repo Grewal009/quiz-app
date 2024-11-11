@@ -24,7 +24,7 @@ const reducer = (state, action) => {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active", index: 0, answer: null, points: 0 };
+      return { ...state, status: "active" };
     case "newAnswer":
       // eslint-disable-next-line no-case-declarations
       const question = state.questions.at(state.index);
@@ -53,6 +53,16 @@ const reducer = (state, action) => {
           state.points > state.highScore ? state.points : state.highScore,
       };
 
+    case "restart":
+      return {
+        ...state,
+        questions: state.questions,
+        highScore: state.highScore,
+        status: "ready",
+        index: 0,
+        points: 0,
+        answer: null,
+      };
     default:
       throw new Error("Action unknown");
   }
@@ -114,13 +124,15 @@ const Main = () => {
             index={index}
           />
         )}
-        {status === "finished" && (
+        {status === "finished" && index == 11 ? (
           <FinishedScreen
             points={points}
             numOfQuestions={numOfQuestions}
             highScore={highScore}
             dispatch={dispatch}
           />
+        ) : (
+          ""
         )}
       </ReactQuiz>
     </div>

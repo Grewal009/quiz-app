@@ -8,7 +8,7 @@ const Question = (prop) => {
         {question.options.map((o, index) => (
           <button
             onClick={() => dispatch({ type: "newAnswer", payload: index })}
-            className={`my-1 w-full cursor-pointer rounded-2xl px-4 py-2 text-left ${index === answer ? "mx-3" : ""} ${answer !== null && index === question.correctOption ? "bg-green-500" : answer !== null ? "bg-orange-400" : "bg-gray-300 hover:mx-3"}`}
+            className={`my-1 w-full cursor-pointer rounded-2xl px-4 py-2 text-left transition-all duration-300 ${index === answer ? "mx-3" : ""} ${answer !== null && index === question.correctOption ? "bg-green-500" : answer !== null ? "bg-orange-400" : "bg-gray-300 hover:mx-3"}`}
             key={index}
             disabled={answer !== null}
           >
