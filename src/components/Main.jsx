@@ -4,12 +4,14 @@ import Loading from "./Loading";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
+import NextButton from "./NextButton";
 
 const initialstate = {
   questions: [],
   status: "loading", // loading, error, ready, active, finished
   index: 0,
   answer: null,
+  points: 0,
 };
 
 const reducer = (state, action) => {
@@ -21,7 +23,24 @@ const reducer = (state, action) => {
     case "start":
       return { ...state, status: "active" };
     case "newAnswer":
-      return { ...state, answer: action.payload };
+      // eslint-disable-next-line no-case-declarations
+      const question = state.questions.at(state.index);
+
+      return {
+        ...state,
+        answer: action.payload,
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.points,
+      };
+
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+      };
 
     default:
       throw new Error("Action unknown");
@@ -54,7 +73,7 @@ const Main = () => {
   };
 
   return (
-    <div>
+    <div className="mt-32 flex h-[435px] justify-center">
       <ReactQuiz>
         {status === "loading" && <Loading />}
         {status === "error" && <Error />}
@@ -68,6 +87,7 @@ const Main = () => {
             dispatch={dispatch}
           />
         )}
+        {answer && <NextButton dispatch={dispatch} answer={answer} />}
       </ReactQuiz>
     </div>
   );
