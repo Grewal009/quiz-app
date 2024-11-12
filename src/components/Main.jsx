@@ -109,54 +109,57 @@ const Main = () => {
   };
 
   return (
-    <div className="mt-32 flex h-[435px] justify-center">
-      <ReactQuiz>
-        {status === "loading" && <Loading />}
-        {status === "error" && <Error />}
-        {status === "ready" && (
-          <StartScreen numOfQuestions={numOfQuestions} dispatch={dispatch} />
-        )}
-        {status === "active" && (
-          <>
-            <Progress
-              index={index}
-              numOfQuestions={numOfQuestions}
-              points={points}
-              answer={answer}
-            />
-            <Question
-              question={questions[index]}
-              answer={answer}
-              dispatch={dispatch}
-            />
-          </>
-        )}
-        <div>
-          <footer className="flex justify-between">
-            {status == "active" && (
-              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
-            )}
-            {(answer == 0 || answer) && (
-              <NextButton
-                dispatch={dispatch}
-                answer={answer}
-                numOfQuestions={numOfQuestions}
+    <div className="flex h-screen flex-col items-center">
+      <div className="h-1/5 bg-gray-300"></div>
+      <div className="flex-grow-0 justify-center">
+        <ReactQuiz>
+          {status === "loading" && <Loading />}
+          {status === "error" && <Error />}
+          {status === "ready" && (
+            <StartScreen numOfQuestions={numOfQuestions} dispatch={dispatch} />
+          )}
+          {status === "active" && (
+            <>
+              <Progress
                 index={index}
-              />
-            )}
-            {status === "finished" && (timeRemaining <= 0 || index == 11) ? (
-              <FinishedScreen
-                points={points}
                 numOfQuestions={numOfQuestions}
-                highScore={highScore}
+                points={points}
+                answer={answer}
+              />
+              <Question
+                question={questions[index]}
+                answer={answer}
                 dispatch={dispatch}
               />
-            ) : (
-              ""
-            )}
-          </footer>
-        </div>
-      </ReactQuiz>
+            </>
+          )}
+          <div>
+            <footer className="flex justify-between">
+              {status == "active" && (
+                <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
+              )}
+              {(answer == 0 || answer) && (
+                <NextButton
+                  dispatch={dispatch}
+                  answer={answer}
+                  numOfQuestions={numOfQuestions}
+                  index={index}
+                />
+              )}
+              {status === "finished" && (timeRemaining <= 0 || index == 11) ? (
+                <FinishedScreen
+                  points={points}
+                  numOfQuestions={numOfQuestions}
+                  highScore={highScore}
+                  dispatch={dispatch}
+                />
+              ) : (
+                ""
+              )}
+            </footer>
+          </div>
+        </ReactQuiz>
+      </div>
     </div>
   );
 };
