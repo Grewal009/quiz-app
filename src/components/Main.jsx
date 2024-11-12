@@ -7,6 +7,7 @@ import Question from "./Question";
 import NextButton from "./NextButton";
 import Progress from "./Progress";
 import FinishedScreen from "./FinishedScreen";
+import Timer from "./Timer";
 
 const initialstate = {
   questions: [],
@@ -15,6 +16,7 @@ const initialstate = {
   answer: null,
   points: 0,
   highScore: 0,
+  timeRemaining: null,
 };
 
 const reducer = (state, action) => {
@@ -24,7 +26,11 @@ const reducer = (state, action) => {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        timeRemaining: state.questions.length * 30,
+      };
     case "newAnswer":
       // eslint-disable-next-line no-case-declarations
       const question = state.questions.at(state.index);
@@ -62,6 +68,14 @@ const reducer = (state, action) => {
         index: 0,
         points: 0,
         answer: null,
+        timeRemaining: null,
+      };
+
+    case "tick":
+      return {
+        ...state,
+        timeRemaining: state.timeRemaining - 1,
+        status: state.timeRemaining == 0 ? "finished" : state.status,
       };
     default:
       throw new Error("Action unknown");
@@ -70,7 +84,8 @@ const reducer = (state, action) => {
 const Main = () => {
   const [state, dispatch] = useReducer(reducer, initialstate);
 
-  const { questions, status, index, answer, points, highScore } = state;
+  const { questions, status, index, answer, points, highScore, timeRemaining } =
+    state;
 
   const numOfQuestions = questions.length;
 
@@ -116,24 +131,31 @@ const Main = () => {
             />
           </>
         )}
-        {(answer == 0 || answer) && (
-          <NextButton
-            dispatch={dispatch}
-            answer={answer}
-            numOfQuestions={numOfQuestions}
-            index={index}
-          />
-        )}
-        {status === "finished" && index == 11 ? (
-          <FinishedScreen
-            points={points}
-            numOfQuestions={numOfQuestions}
-            highScore={highScore}
-            dispatch={dispatch}
-          />
-        ) : (
-          ""
-        )}
+        <div>
+          <footer className="flex justify-between">
+            {status == "active" && (
+              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
+            )}
+            {(answer == 0 || answer) && (
+              <NextButton
+                dispatch={dispatch}
+                answer={answer}
+                numOfQuestions={numOfQuestions}
+                index={index}
+              />
+            )}
+            {status === "finished" && (timeRemaining <= 0 || index == 11) ? (
+              <FinishedScreen
+                points={points}
+                numOfQuestions={numOfQuestions}
+                highScore={highScore}
+                dispatch={dispatch}
+              />
+            ) : (
+              ""
+            )}
+          </footer>
+        </div>
       </ReactQuiz>
     </div>
   );
