@@ -2,7 +2,7 @@ const Question = (prop) => {
   const { question, answer, dispatch } = prop;
   console.log(question, answer, dispatch);
   return (
-    <div className="flex w-96 flex-col">
+    <div className="flex w-[320px] flex-col px-6 text-sm font-medium sm:w-[500px] md:w-[600px] lg:w-[800px] lg:text-xl lg:font-semibold">
       <p className="leading-5">{question.question}</p>
       <div className="w-full">
         {question.options.map((o, index) => (

@@ -13,7 +13,7 @@ const FinishedScreen = (prop) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-xl font-semibold">
+    <div className="flex flex-col items-center justify-center text-sm font-medium lg:text-xl lg:font-semibold">
       <p className="my-1 w-full cursor-pointer rounded-2xl bg-cyan-500 px-4 py-3 text-center text-zinc-50">
         {emoji} Your score <strong>{points}</strong> out of{" "}
         {numOfQuestions * 10}

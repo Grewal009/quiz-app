@@ -2,11 +2,11 @@ const NextButton = (prop) => {
   const { dispatch, numOfQuestions, index } = prop;
 
   return (
-    <div className="flex justify-end">
+    <div className="mx-3 flex w-auto justify-end">
       {index < numOfQuestions - 1 ? (
         <button
           onClick={() => dispatch({ type: "nextQuestion" })}
-          className="mt-3 rounded-2xl bg-slate-500 px-5 py-2 text-slate-50 transition-all duration-300 hover:bg-gray-600"
+          className="mt-3 rounded-2xl bg-slate-500 px-5 py-2 text-sm font-medium text-slate-50 transition-all duration-300 hover:bg-gray-600"
         >
           Next
         </button>
@@ -16,7 +16,7 @@ const NextButton = (prop) => {
       {index === numOfQuestions - 1 ? (
         <button
           onClick={() => dispatch({ type: "finish" })}
-          className="mt-3 rounded-2xl bg-slate-500 px-5 py-2 text-slate-50 transition-all duration-300 hover:bg-gray-600"
+          className="mt-3 rounded-2xl bg-slate-500 px-5 py-2 text-sm font-medium text-slate-50 transition-all duration-300 hover:bg-gray-600"
         >
           Finish
         </button>

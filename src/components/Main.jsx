@@ -95,7 +95,7 @@ const Main = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:9000/questions");
+      const response = await fetch("http://192.168.0.89:9000/questions");
       if (!response.ok) {
         throw new Error(`Error:${response.status} ${response.statusText}`);
       }
@@ -110,7 +110,7 @@ const Main = () => {
 
   return (
     <div className="flex h-screen flex-col items-center">
-      <div className="h-1/5 bg-gray-300"></div>
+      <div className="h-1/6 bg-gray-300 lg:h-1/5"></div>
       <div className="flex-grow-0 justify-center">
         <ReactQuiz>
           {status === "loading" && <Loading />}

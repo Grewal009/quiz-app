@@ -1,8 +1,8 @@
 const Progress = (prop) => {
   const { index, numOfQuestions, points, answer } = prop;
   return (
-    <header className="my-5">
-      <div className="h-6 w-full">
+    <header className="my-5 w-[320px] px-3 text-sm font-medium sm:w-[500px] md:w-[600px] lg:w-[800px] lg:text-xl lg:font-semibold">
+      <div className="h-6">
         <progress
           max={numOfQuestions}
           value={index + Number(answer !== null)}
