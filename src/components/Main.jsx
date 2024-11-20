@@ -8,7 +8,7 @@ import NextButton from "./NextButton";
 import Progress from "./Progress";
 import FinishedScreen from "./FinishedScreen";
 import Timer from "./Timer";
-import { GET_REQUEST_API } from "../../utils/constants";
+import { GET_REQUEST_LH_API } from "../../utils/constants";
 const initialstate = {
   questions: [],
   status: "loading", // loading, error, ready, active, finished
@@ -95,7 +95,7 @@ const Main = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(GET_REQUEST_API);
+      const response = await fetch(GET_REQUEST_LH_API);
       if (!response.ok) {
         throw new Error(`Error:${response.status} ${response.statusText}`);
       }
